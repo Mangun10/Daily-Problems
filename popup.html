@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA Study Plan Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>DSA Study Plan Tracker</h1>
+      <div class="user-info">
+        <span id="current-user">Hello, Mangun10!</span>
+        <span id="current-date">2025-03-23</span>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="tracker">Today's Progress</button>
+      <button class="tab-btn" data-tab="history">History</button>
+      <button class="tab-btn" data-tab="settings">Settings</button>
+    </div>
+
+    <div class="tab-content" id="tracker">
+      <div class="study-plan-info">
+        <h2 id="current-day-title">Day 1: Arrays & Strings</h2>
+        <div class="progress-stats">
+          <div class="stat">
+            <span class="stat-label">Target:</span>
+            <span class="stat-value" id="daily-target">5</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Solved:</span>
+            <span class="stat-value" id="solved-count">0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Remaining:</span>
+            <span class="stat-value" id="remaining-count">5</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="question-form">
+        <div class="form-group">
+          <label for="question-name">Question Name:</label>
+          <input type="text" id="question-name" required placeholder="e.g., Two Sum">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty" required>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="time-taken">Time Taken (minutes):</label>
+            <input type="number" id="time-taken" min="1" required placeholder="30">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="comments">Comments/Mistakes:</label>
+          <textarea id="comments" placeholder="Note any mistakes or insights..."></textarea>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="revision-needed">
+          <label for="revision-needed">Needs Revision</label>
+        </div>
+
+        <button type="submit" id="submit-btn">Submit Question</button>
+      </form>
+    </div>
+
+    <div class="tab-content hidden" id="history">
+      <div class="search-filter">
+        <input type="text" id="search-questions" placeholder="Search questions...">
+        <select id="filter-day">
+          <option value="all">All Days</option>
+          <option value="1">Day 1: Arrays & Strings</option>
+          <option value="2">Day 2: Recursion & Backtracking</option>
+          <option value="3">Day 3: Linked Lists</option>
+          <option value="4">Day 4: Stacks & Queues</option>
+          <option value="5">Day 5: Hashing & Heaps</option>
+          <option value="6">Day 6: Binary Trees & BST</option>
+          <option value="7">Day 7: Graphs (BFS & DFS)</option>
+          <option value="8">Day 8: Dynamic Programming Basics</option>
+          <option value="9">Day 9: DP – Hard Problems</option>
+          <option value="10">Day 10: Greedy Algorithms</option>
+          <option value="11">Day 11: Sorting & Searching</option>
+          <option value="12">Day 12: Mock Test 1</option>
+          <option value="13">Day 13: Mock Test 2 + Review</option>
+          <option value="14">Day 14: Final Revision & Quick Tricks</option>
+        </select>
+      </div>
+      <div id="history-list" class="history-list">
+        <!-- Will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <div class="tab-content hidden" id="settings">
+      <h2>Study Plan Settings</h2>
+      <div class="form-group">
+        <label for="daily-question-target">Daily Question Target:</label>
+        <input type="number" id="daily-question-target" min="1" value="5">
+      </div>
+      
+      <div class="form-group">
+        <label for="reminder-time">Daily Reminder Time:</label>
+        <input type="time" id="reminder-time" value="09:00">
+      </div>
+      
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="enable-notifications" checked>
+        <label for="enable-notifications">Enable Notifications</label>
+      </div>
+      
+      <button id="save-settings">Save Settings</button>
+      <button id="reset-progress">Reset All Progress</button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
