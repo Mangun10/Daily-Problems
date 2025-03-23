@@ -1,13 +1,8 @@
 {
   "manifest_version": 3,
   "name": "DSA Study Plan Tracker",
-  "version": "1.0.0",
-  "description": "Track your progress through a 14-day DSA study plan with daily reminders and progress tracking",
-  "permissions": [
-    "alarms",
-    "storage",
-    "notifications"
-  ],
+  "version": "1.0",
+  "description": "Track your progress through a 14-day DSA study plan",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -16,8 +11,19 @@
       "128": "images/icon128.png"
     }
   },
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "host_permissions": [
+    "http://localhost:3000/*"
+  ],
   "background": {
     "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:3000"
   },
   "icons": {
     "16": "images/icon16.png",

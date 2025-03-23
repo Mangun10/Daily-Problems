@@ -7,122 +7,149 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>DSA Study Plan Tracker</h1>
-      <div class="user-info">
-        <span id="current-user">Hello, Mangun10!</span>
-        <span id="current-date">2025-03-23</span>
+  <header>
+    <h1>DSA Study Plan Tracker</h1>
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-label">Today:</span>
+        <span id="solved-count">0</span>/<span id="daily-target">5</span>
       </div>
-    </header>
+      <div class="stat-item">
+        <span class="stat-label">Total:</span>
+        <span id="total-count">0</span>
+      </div>
+    </div>
+  </header>
 
-    <div class="tabs">
-      <button class="tab-btn active" data-tab="tracker">Today's Progress</button>
-      <button class="tab-btn" data-tab="history">History</button>
-      <button class="tab-btn" data-tab="settings">Settings</button>
+  <div class="container">
+    <div class="tab-container">
+      <button class="tab-button active" data-tab="track">Track Problems</button>
+      <button class="tab-button" data-tab="plan">Study Plan</button>
+      <button class="tab-button" data-tab="stats">Statistics</button>
     </div>
 
-    <div class="tab-content" id="tracker">
-      <div class="study-plan-info">
-        <h2 id="current-day-title">Day 1: Arrays & Strings</h2>
-        <div class="progress-stats">
-          <div class="stat">
-            <span class="stat-label">Target:</span>
-            <span class="stat-value" id="daily-target">5</span>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Solved:</span>
-            <span class="stat-value" id="solved-count">0</span>
-          </div>
-          <div class="stat">
-            <span class="stat-label">Remaining:</span>
-            <span class="stat-value" id="remaining-count">5</span>
-          </div>
-        </div>
-      </div>
+    <div id="notification" class="notification"></div>
 
-      <form id="question-form">
+    <div class="tab-content active" id="track-tab">
+      <form id="problem-form">
+        <div class="form-group">
+          <label for="day">Day:</label>
+          <select id="day" required>
+            <!-- Days will be populated by JavaScript -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="topic">Topic:</label>
+          <input type="text" id="topic" readonly>
+        </div>
+
         <div class="form-group">
           <label for="question-name">Question Name:</label>
-          <input type="text" id="question-name" required placeholder="e.g., Two Sum">
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="difficulty">Difficulty:</label>
-            <select id="difficulty" required>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="time-taken">Time Taken (minutes):</label>
-            <input type="number" id="time-taken" min="1" required placeholder="30">
+          <input type="text" id="question-name" required>
+          <div class="suggested-questions">
+            <p>Suggested questions:</p>
+            <ul id="suggested-questions"></ul>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="comments">Comments/Mistakes:</label>
-          <textarea id="comments" placeholder="Note any mistakes or insights..."></textarea>
+          <label for="difficulty">Difficulty:</label>
+          <select id="difficulty" required>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
         </div>
 
-        <div class="form-group checkbox-group">
+        <div class="form-group">
+          <label for="time-spent">Time Spent (minutes):</label>
+          <input type="number" id="time-spent" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="comments">Comments:</label>
+          <textarea id="comments"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="mistakes">Mistakes Made:</label>
+          <textarea id="mistakes"></textarea>
+        </div>
+
+        <div class="form-group checkbox">
           <input type="checkbox" id="revision-needed">
-          <label for="revision-needed">Needs Revision</label>
+          <label for="revision-needed">Revision Needed</label>
         </div>
 
-        <button type="submit" id="submit-btn">Submit Question</button>
+        <button type="submit" class="submit-btn">Submit</button>
       </form>
     </div>
 
-    <div class="tab-content hidden" id="history">
-      <div class="search-filter">
-        <input type="text" id="search-questions" placeholder="Search questions...">
-        <select id="filter-day">
-          <option value="all">All Days</option>
-          <option value="1">Day 1: Arrays & Strings</option>
-          <option value="2">Day 2: Recursion & Backtracking</option>
-          <option value="3">Day 3: Linked Lists</option>
-          <option value="4">Day 4: Stacks & Queues</option>
-          <option value="5">Day 5: Hashing & Heaps</option>
-          <option value="6">Day 6: Binary Trees & BST</option>
-          <option value="7">Day 7: Graphs (BFS & DFS)</option>
-          <option value="8">Day 8: Dynamic Programming Basics</option>
-          <option value="9">Day 9: DP – Hard Problems</option>
-          <option value="10">Day 10: Greedy Algorithms</option>
-          <option value="11">Day 11: Sorting & Searching</option>
-          <option value="12">Day 12: Mock Test 1</option>
-          <option value="13">Day 13: Mock Test 2 + Review</option>
-          <option value="14">Day 14: Final Revision & Quick Tricks</option>
+    <div class="tab-content" id="plan-tab">
+      <div class="current-day">
+        <h2>Today's Topic: <span id="current-day-topic"></span></h2>
+        <p id="current-day-description"></p>
+      </div>
+
+      <div class="day-selector">
+        <label for="select-day">Select Day:</label>
+        <select id="select-day">
+          <!-- Days will be populated by JavaScript -->
         </select>
       </div>
-      <div id="history-list" class="history-list">
-        <!-- Will be populated by JavaScript -->
+
+      <div class="suggested-problems">
+        <h3>Suggested Problems:</h3>
+        <ul id="day-problems"></ul>
+      </div>
+
+      <div class="daily-target">
+        <label for="target-problems">Daily Target (problems):</label>
+        <input type="number" id="target-problems" min="1" value="5">
+        <button id="save-target">Save</button>
       </div>
     </div>
 
-    <div class="tab-content hidden" id="settings">
-      <h2>Study Plan Settings</h2>
-      <div class="form-group">
-        <label for="daily-question-target">Daily Question Target:</label>
-        <input type="number" id="daily-question-target" min="1" value="5">
+    <div class="tab-content" id="stats-tab">
+      <div class="stats-summary">
+        <h2>Problem Solving Stats</h2>
+        
+        <div class="stat-row">
+          <div class="stat-box">
+            <h3>Problems by Difficulty</h3>
+            <div class="difficulty-stats">
+              <div class="difficulty easy">
+                <span class="label">Easy:</span>
+                <span id="easy-count">0</span>
+              </div>
+              <div class="difficulty medium">
+                <span class="label">Medium:</span>
+                <span id="medium-count">0</span>
+              </div>
+              <div class="difficulty hard">
+                <span class="label">Hard:</span>
+                <span id="hard-count">0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="progress-container">
+            <h3>14-Day Progress</h3>
+            <div class="progress-bars" id="day-progress">
+              <!-- Will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+        
+        <button id="export-data" class="action-button">Export Data</button>
       </div>
-      
-      <div class="form-group">
-        <label for="reminder-time">Daily Reminder Time:</label>
-        <input type="time" id="reminder-time" value="09:00">
-      </div>
-      
-      <div class="form-group checkbox-group">
-        <input type="checkbox" id="enable-notifications" checked>
-        <label for="enable-notifications">Enable Notifications</label>
-      </div>
-      
-      <button id="save-settings">Save Settings</button>
-      <button id="reset-progress">Reset All Progress</button>
     </div>
   </div>
+
+  <script src="studyPlan.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
