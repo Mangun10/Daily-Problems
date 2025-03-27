@@ -175,3 +175,12 @@ function getCurrentDayInfo() {
 function getDayInfo(dayNumber) {
   return studyPlan.find(day => day.day === dayNumber);
 }
+
+function resetStudyPlanStartDate() {
+  const today = new Date();
+  chrome.storage.local.set({ studyPlanStartDate: today.toString() }, () => {
+    showNotification('Study plan reset to start from today!');
+    loadCurrentDay();  // Reload current day info
+    loadDays();        // Reload days in the dropdown
+  });
+}

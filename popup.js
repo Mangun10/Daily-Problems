@@ -29,6 +29,7 @@ const dayProgressElement = document.getElementById('day-progress');
 const exportDataButton = document.getElementById('export-data');
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
+const resetButton = document.getElementById('reset-button'); // Add reset button element
 
 // Get/generate user ID
 function getUserId() {
@@ -326,6 +327,19 @@ function setupEventListeners() {
         updateStats();
       }
     });
+  });
+
+  // Reset study plan
+  resetButton.addEventListener('click', resetStudyPlanStartDate);
+}
+
+// Function to reset the study plan start date
+function resetStudyPlanStartDate() {
+  const today = new Date();
+  chrome.storage.local.set({ studyPlanStartDate: today.toString() }, () => {
+    showNotification('Study plan reset to start from today!');
+    loadCurrentDay();  // Reload current day info
+    loadDays();        // Reload days in the dropdown
   });
 }
 

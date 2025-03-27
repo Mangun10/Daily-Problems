@@ -1,0 +1,58 @@
+Since `forever` does not persist processes across reboots by default, you need to **manually restart it when the system boots**. Here’s how to ensure your `server.js` **automatically starts** every time your computer reboots.
+forever start server.js
+---
+
+### ✅ **Method 1: Run `forever` on Startup Using a Batch Script (Recommended)**
+
+1️⃣ **Create a Startup Batch File:**
+
+- Open **Notepad** and paste this:
+  ```cmd
+  @echo off
+  cd "C:\Users\manas\OneDrive\Desktop\projects\Extensions\Daily Problems"
+  forever start server.js
+  ```
+- Click **File > Save As**, set **"Save as type"** to **All Files**, and name it:
+  ```
+  start_forever.bat
+  ```
+- Save it in:
+  ```
+  C:\Users\manas\start_forever.bat
+  ```
+
+2️⃣ **Add It to Windows Startup:**
+
+- Press **Win + R**, type:
+  ```
+  shell:startup
+  ```
+  and press **Enter**.
+- Move **`start_forever.bat`** into this folder.
+
+### ✅ **Method 2: Use Task Scheduler (More Reliable)**
+
+If the batch script doesn’t work, use **Task Scheduler**:
+
+1️⃣ **Open Task Scheduler** (`Win + R`, type `taskschd.msc`, press Enter).  
+2️⃣ Click **"Create Basic Task..."** in the right panel.  
+3️⃣ Name it **"Start Node Server"**, then click **Next**.  
+4️⃣ Choose **"When I log on"**, then click **Next**.  
+5️⃣ Select **"Start a program"**, then click **Next**.  
+6️⃣ Click **Browse**, select your `start_forever.bat` file, and click **Open**.  
+7️⃣ Click **Finish**.
+
+🔄 Now, every time you log in, Task Scheduler will run the batch script and start your server.
+
+---
+
+### ✅ **Final Test:**
+
+- Restart your computer.
+- Open **PowerShell** and run:
+  ```powershell
+  forever list
+  ```
+  If you see `server.js` running, then **it worked**! 🚀
+
+Let me know if you need more help!
