@@ -4,7 +4,8 @@
 
 A Chrome extension to help you track and complete a structured 14-day Data Structures and Algorithms (DSA) study plan. This tool helps you stay consistent with your DSA practice by providing daily topic suggestions, tracking your solved problems, and visualizing your progress.
 
-![DSA Study Plan Tracker](https://example.com/screenshot.png)
+![icon128](https://github.com/user-attachments/assets/00c910d3-77c5-482e-8f4a-0bd8723a5d9e)
+
 
 ## Features
 
